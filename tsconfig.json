@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "lib",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "lib": [
+      "es6",
+      "es7"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
