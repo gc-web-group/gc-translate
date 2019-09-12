@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "Internationalize React apps",
   "license": "MIT",
-  "author": {
-    "name": "Andrey Khomutovskiy",
-    "email": "andrey.khomutovskiy.work@gmail.com"
-  },
+  "author": "Andrey Khomutovskiy",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gc-web-group/gc-translate.git"
@@ -16,48 +13,37 @@
   },
   "homepage": "https://github.com/gc-web-group/gc-translate#readme",
   "keywords": [
+    "translate",
     "translation",
     "internationalization",
+    "intl",
     "i18n",
+    "json",
     "react",
-    "react translate",
-    "gc",
-    "gc-translate"
+    "react-translate",
+    "react-translate-json"
   ],
   "files": [
-    "dist",
+    "lib",
     "LICENSE",
     "README.md"
   ],
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "webpack --progress --config webpack.js",
-    "prepublish": "npm run build"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "react": ">=16.3.2"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
-    "prop-types": "^15.7.2"
+    "lodash.get": "^4.4.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-proposal-export-default-from": "^7.5.2",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.0.2",
-    "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^3.0.0",
-    "eslint": "^6.1.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-import-resolver-webpack": "^0.11.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.2",
-    "uglifyjs-webpack-plugin": "^2.1.3",
-    "webpack": "^4.36.1",
-    "webpack-cli": "^3.3.6"
+    "@types/lodash.get": "^4.4.6",
+    "@types/react": "^16.3.2",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
   }
 }

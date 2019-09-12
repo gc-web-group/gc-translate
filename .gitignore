@@ -30,6 +30,7 @@ jspm_packages/
 # Compiled binary
 build/Release
 dist
+lib
 
 # Output of 'npm pack'
 *.tgz
