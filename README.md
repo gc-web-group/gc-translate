@@ -42,15 +42,15 @@ import { withTranslate } from 'gc-translate'
 @withTranslate
 export default class Main extends Compenent {
   render () {
-    const { tr } = this.props
+    const { intl } = this.props
 
     return (
-      <h1>{ tr.dictionary.title }</h1>
-      <h2>{ tr.getTranslate('Main.example', { num: 1 }) }</h2>
-      <p>{ tr.getTranslate(['Main', 'info']) }</p>
+      <h1>{ intl.tr.title }</h1>
+      <h2>{ intl.tr('Main.example', { num: 1 }) }</h2>
+      <p>{ intl.tr(['Main', 'info']) }</p>
       <div>
-        <button onClick={() => { tr.changeLanguage('en') }}>En</button>
-        <button onClick={() => { tr.changeLanguage('ru') }}>Ru</button>
+        <button onClick={() => { intl.changeLang('en') }}>En</button>
+        <button onClick={() => { intl.changeLang('ru') }}>Ru</button>
       </div>
     )
   }
@@ -66,10 +66,10 @@ import Main from 'Main';
 
 ReactDOM.render(
   <TrProvider
-    defaultLanguage='en'
+    defaultLang='en'
     dictionaries={{
-      en: () => import('lang/en.json'),
-      ru: () => import('lang/ru.json'),
+      en: () => import('./lang/en.json'),
+      ru: () => import('./lang/ru.json'),
     }}
   >
     <Main />
@@ -90,7 +90,7 @@ import { TrProvider } from 'gc-translate'
 ```
 ```xml
 <TrProvider
-  defaultLanguage={string}
+  defaultLang={string}
   dictionaries={object}
 >
   {/* render something */}
@@ -98,13 +98,20 @@ import { TrProvider } from 'gc-translate'
 ```
 
 #### Properties
-*defaultLanguage* (**required**) - default language from the dictionaries list
+*defaultLang* (**required**) - default language from the dictionaries list
 
-*dictionaries* (**required**) - list of connected json files with translations
+*dictionaries* (**required**) - list of connected json files or objects with translations ([Dictionary](#dictionary))
 ```js
 {
   en: () => import('lang/en.json'),
   ru: () => import('lang/ru.json'),
+}
+```
+or
+```js
+{
+  en: { /* Object with translations */ },
+  ru: { /* Object with translations */ },
 }
 ```
 
@@ -133,7 +140,7 @@ import { withTranslate } from 'gc-translate'
 @withTranslate
 class Page extends Compenent {
   render () {
-    const { tr } = this.props;
+    const { intl } = this.props;
 
     /* render something based on the context value */
   }
@@ -141,7 +148,7 @@ class Page extends Compenent {
 ```
 
 #### Props
-*tr* - [context object](#context) with translations and handling translations
+*intl* - [context object](#context) with translations and handling translations
 
 
 ### `TrContext`
@@ -155,9 +162,9 @@ class Page extends Compenent {
 
   render () {
     const {
-      dictionary,
-      getTranslate,
-      changeLanguage,
+      tr,
+      lang,
+      changeLang,
     } = this.context;
 
     /* render something based on the context value */
@@ -167,8 +174,27 @@ class Page extends Compenent {
 
 
 ### Context
-#### `dictionary`
-Data json-file with translations
+
+#### `lang`
+The value of the current language
+
+#### `tr`
+Object with translations [dictionary](#dictionary)
+
+#### `tr(path[, options])`
+Function for translation
+
+**Arguments:**
+
+*path* (**required**) - path of object [dictionary](#dictionary)
+
+*options* - object options for replace in value at path of dictionary
+
+#### `changeLang(newLanguage)`
+Function for changing the current language
+
+### Dictionary
+Data with translations
 
 **Example:**
 ```json
@@ -180,18 +206,6 @@ Data json-file with translations
   }
 }
 ```
-
-#### `getTranslate(path[, options])`
-
-**Arguments:**
-
-*path* (**required**) - path of object [dictionary](#dictionary)
-
-*options* - object options for replace in value at path of dictionary
-
-#### `changeLanguage(newLanguage)`
-Function for changing the current language
-
 
 ## License
 This software is free to use under the MIT license.
